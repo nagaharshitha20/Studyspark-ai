@@ -44,7 +44,7 @@ export default function FlashcardView({ flashcards }) {
           Card {index + 1} of {order.length}
           {bookmarked.size > 0 && ` · ${bookmarked.size} bookmarked`}
         </span>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-1">
           <button
             onClick={shuffle}
             className="rounded-full p-1.5 hover:bg-ink-100 dark:hover:bg-ink-800 transition"
@@ -60,6 +60,19 @@ export default function FlashcardView({ flashcards }) {
             title="Restart"
           >
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
+          </button>
+          <button
+            onClick={toggleBookmark}
+            aria-pressed={isBookmarked}
+            aria-label={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
+            title={isBookmarked ? "Remove bookmark" : "Bookmark"}
+            className={`rounded-full p-1.5 transition ${
+              isBookmarked
+                ? "text-highlight-600 bg-highlight-400/20"
+                : "text-ink-400 hover:text-highlight-600 hover:bg-ink-100 dark:hover:bg-ink-800"
+            }`}
+          >
+            <Bookmark className="h-4 w-4" fill={isBookmarked ? "currentColor" : "none"} aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -87,19 +100,6 @@ export default function FlashcardView({ flashcards }) {
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           Prev
-        </button>
-
-        <button
-          onClick={toggleBookmark}
-          aria-pressed={isBookmarked}
-          aria-label={isBookmarked ? "Remove bookmark" : "Bookmark this card"}
-          className={`rounded-full p-2.5 border transition ${
-            isBookmarked
-              ? "border-highlight-500 bg-highlight-400/20 text-highlight-600"
-              : "border-ink-200 dark:border-ink-800 text-ink-400 hover:text-highlight-600"
-          }`}
-        >
-          <Bookmark className="h-4 w-4" fill={isBookmarked ? "currentColor" : "none"} aria-hidden="true" />
         </button>
 
         <button
