@@ -4,8 +4,10 @@
  * in-flight requests -- this is what prevents a stale response from a
  * previous "Generate" click overwriting a newer one.
  */
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
 export async function generateStudySet(notes, signal) {
-  const response = await fetch("/api/study/generate", {
+  const response = await fetch(`${API_BASE_URL}/api/study/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ notes }),
