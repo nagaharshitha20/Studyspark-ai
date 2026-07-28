@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 dark:bg-ink-950 dark:text-ink-100 transition-colors duration-200;
+  }
+  ::selection {
+    @apply bg-highlight-400/60;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-marker-500 ring-offset-2 ring-offset-ink-50 dark:ring-offset-ink-950;
+  }
+}
+
+@layer utilities {
+  .card-flip-container {
+    perspective: 1600px;
+  }
+  .card-flip-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .card-flip-inner.is-flipped {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    backface-visibility: hidden;
+  }
+  .card-face-back {
+    transform: rotateY(180deg);
+  }
+}
